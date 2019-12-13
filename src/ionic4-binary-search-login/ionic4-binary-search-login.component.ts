@@ -17,9 +17,11 @@ export class Ionic4BinarySearchLoginComponent {
   public isLoggedIn:boolean = false;
   public isLoggingOut:boolean = false;
   public isLoggingIn:boolean = false;
+  public isSearching:boolean = false;
   public lastI:number = 0;
   public minUsernameLength:number = 8;
   public showPassword:boolean = false;
+  public shownI:number = 0;
   public usernamesLength:number = 0;
   public minI:number = 0;
   public maxI:number = 0;
@@ -42,74 +44,74 @@ export class Ionic4BinarySearchLoginComponent {
   }
 
   createUsernames(word):string[] {
-      let usernames = [];
+    let usernames = [];
 
-      usernames = usernames.concat(this.createUsernameWithNumbers(word));
-      usernames = usernames.concat(this.createUsernameMixed(word));
+    usernames = usernames.concat(this.createUsernameWithNumbers(word));
+    usernames = usernames.concat(this.createUsernameMixed(word));
 
-      return usernames;
+    return usernames;
   }
 
   createUsernameWithNumbers(word:string) {
-      const usernames = [];
+    const usernames = [];
 
-      const wordLength = word.length;
+    const wordLength = word.length;
 
-      const remainingCharacters = this.minUsernameLength - wordLength;
+    const remainingCharacters = this.minUsernameLength - wordLength;
 
-      if (remainingCharacters > 0) {
-          for (let i = 0; i < 10; i++) {
-              let newUsername = word;
+    if (remainingCharacters > 0) {
+      for (let i = 0; i < 10; i++) {
+        let newUsername = word;
 
-              let length = Math.round(Math.random() * remainingCharacters);
-              if (length === 0) {
-                  length += 1;
-              }
+        let length = Math.round(Math.random() * remainingCharacters);
+        if (length === 0) {
+          length += 1;
+        }
 
-              for (let j = 0; j < length; j++) {
-                  newUsername += Math.round(Math.random() * 9);
-              }
+        for (let j = 0; j < length; j++) {
+          newUsername += Math.round(Math.random() * 9);
+        }
 
-              usernames.push(newUsername);
-          }
+        usernames.push(newUsername);
       }
+    }
 
-      return usernames;
+    return usernames;
   }
 
   createUsernameMixed(word:string) {
-      const usernames = [];
+    const usernames = [];
 
-      const wordLength = word.length;
+    const wordLength = word.length;
 
-      for (let i = 0; i < 10; i++) {
-          for (let j = 0; j < wordLength; j++) {
-              let letters = word.split('');
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < wordLength; j++) {
+        let letters = word.split('');
 
-              let prefix = '';
-              for (let k = 0; k < j; k++) {
-                  prefix += letters[k];
-              }
+        let prefix = '';
+        for (let k = 0; k < j; k++) {
+          prefix += letters[k];
+        }
 
-              letters.splice(0, j);
+        letters.splice(0, j);
 
-              const lettersLength = letters.length;
+        const lettersLength = letters.length;
 
-              for (let k = wordLength - 1; k >= 0; k--) {
-                  let newUsername = prefix;
+        for (let k = wordLength - 1; k >= 0; k--) {
+          let newUsername = prefix;
 
-                  for (let l = lettersLength - 1; l >= 0; l--) {
-                      const letter = letters[Math.round(Math.random() * l)];
+          for (let l = lettersLength - 1; l >= 0; l--) {
+            const letter = letters[Math.round(Math.random() * l)];
 
-                      newUsername += letter;
-                  }
-
-                  usernames.push(this.createUsernameWithNumbers(newUsername));
-              }
+            newUsername += letter;
           }
-      }
 
-      return usernames;
+          usernames.push(this.createUsernameWithNumbers(newUsername));
+        }
+      }
+    }
+
+    return usernames;
   }
 
   findUsername(isHigher:boolean):void {
@@ -127,7 +129,41 @@ export class Ionic4BinarySearchLoginComponent {
 
     this.lastI = Math.round(this.lastI);
 
-    this.candidateUsername = this.usernames[this.lastI];
+    this.search();
+  }
+
+  search() {
+    this.isSearching = true;
+
+    if (this.shownI !== this.lastI) {
+      const difference = this.lastI - this.shownI;
+      const skip = 300;
+
+      if (difference > skip) {
+        this.shownI += skip;
+      } else if (difference < -1 * skip) {
+        this.shownI -= skip;
+      }
+
+      if (this.shownI > this.lastI) {
+        this.shownI--;
+      } else {
+        this.shownI++;
+      }
+
+      this.candidateUsername = this.usernames[this.shownI];
+
+      setTimeout(
+        () => {
+          this.search();
+        },
+        1
+      );
+    } else {
+      this.candidateUsername = this.usernames[this.lastI];
+
+      this.isSearching = false;
+    }
   }
 
   formIsFilled():boolean {

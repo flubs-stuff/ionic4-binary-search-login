@@ -1,13 +1,14 @@
 <form (ngSubmit)="login()">
   <ion-item>
     <ion-input [placeholder]="'Username'"
+               [name]="'Username'"
                [disabled]="true"
                [(ngModel)]="candidateUsername"></ion-input>
 
     <ion-button [color]="'success'"
                 [expand]="'block'"
                 (click)="findUsername(true)"
-                [disabled]="isLoggingIn || !formIsFilled()">
+                [disabled]="isLoggingIn || isSearching">
 
       <ion-icon [slot]="'icon-only'"
                 [name]="'shuffle'"
@@ -19,7 +20,7 @@
     <ion-button [color]="'success'"
                 [expand]="'block'"
                 (click)="setUsername()"
-                [disabled]="isLoggingIn || !formIsFilled()">
+                [disabled]="isLoggingIn || isSearching">
 
       <ion-icon [slot]="'icon-only'"
                 [name]="'shuffle'"
@@ -31,7 +32,7 @@
     <ion-button [color]="'success'"
                 [expand]="'block'"
                 (click)="findUsername(false)"
-                [disabled]="isLoggingIn || !formIsFilled()">
+                [disabled]="isLoggingIn || isSearching">
 
       <ion-icon [slot]="'icon-only'"
                 [name]="'shuffle'"
@@ -43,6 +44,7 @@
 
   <ion-item>
     <ion-input [type]="showPassword ? 'text' : 'password'"
+               [name]="'Password'"
                [placeholder]="'Password'"
                [disabled]="true"
                [(ngModel)]="user.password"
