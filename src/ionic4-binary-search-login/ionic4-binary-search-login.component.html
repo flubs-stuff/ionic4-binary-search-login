@@ -1,0 +1,69 @@
+<form (ngSubmit)="login()">
+  <ion-item>
+    <ion-input [placeholder]="'Username'"
+               [disabled]="true"
+               [(ngModel)]="candidateUsername"></ion-input>
+
+    <ion-button [color]="'success'"
+                [expand]="'block'"
+                (click)="findUsername(true)"
+                [disabled]="isLoggingIn || !formIsFilled()">
+
+      <ion-icon [slot]="'icon-only'"
+                [name]="'shuffle'"
+                [color]="'light'"></ion-icon>
+
+      Higher
+    </ion-button>
+
+    <ion-button [color]="'success'"
+                [expand]="'block'"
+                (click)="setUsername()"
+                [disabled]="isLoggingIn || !formIsFilled()">
+
+      <ion-icon [slot]="'icon-only'"
+                [name]="'shuffle'"
+                [color]="'light'"></ion-icon>
+
+      That's It!
+    </ion-button>
+
+    <ion-button [color]="'success'"
+                [expand]="'block'"
+                (click)="findUsername(false)"
+                [disabled]="isLoggingIn || !formIsFilled()">
+
+      <ion-icon [slot]="'icon-only'"
+                [name]="'shuffle'"
+                [color]="'light'"></ion-icon>
+
+      Lower
+    </ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-input [type]="showPassword ? 'text' : 'password'"
+               [placeholder]="'Password'"
+               [disabled]="true"
+               [(ngModel)]="user.password"
+               (keyup.enter)="login()"></ion-input>
+    <ion-icon [ngClass]="showPassword ? 'fa fa-eye' : 'fa fa-eye-slash'"
+              (click)="toggleShowPassword()"></ion-icon>
+  </ion-item>
+
+  <ion-row>
+    <ion-col [size]="12">
+      <ion-button [color]="'success'"
+                  [expand]="'block'"
+                  (click)="login()"
+                  [disabled]="isLoggingIn || !formIsFilled()">
+
+        <ion-icon [slot]="'icon-only'"
+                  [name]="'shuffle'"
+                  [color]="'light'"></ion-icon>
+
+        {{ isLoggingIn ? 'Login' : 'Logging in...' }}
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</form>

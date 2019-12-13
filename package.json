@@ -1,0 +1,113 @@
+{
+  "name": "@flubs/ionic4-binary-search-login",
+  "version": "0.0.1",
+  "private": false,
+  "scripts": {
+    "build": "ng-packagr -p package.json && cp src/scss/ionic4-binary-search-login.scss dist/ionic4-binary-search-login.scss && cp -r src/assets dist/assets",
+    "demo": "cd demo && ionic serve",
+    "demo:build": "npm run build && cd demo && cp -fr ../dist/* node_modules/@flubs/ionic4-binary-search-login/ && cd ..",
+    "demo:run": "npm run demo:build && npm run demo",
+    "docs": "npm run docs:build",
+    "docs:build": "compodoc -p tsconfig.json -n ionic4-binary-search-login -d docs --hideGenerator",
+    "docs:serve": "npm run docs:build -- -s",
+    "docs:watch": "npm run docs:build -- -s -w",
+    "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
+    "publish": "npm publish dist --access=public",
+    "shipit": "npm run lint && npm run test && npm run demo:build && npm run docs:build && npm run publish",
+    "test": "tsc && karma start"
+  },
+  "ngPackage": {
+    "lib": {
+      "cssUrl": "inline",
+      "entryFile": "src/index.ts",
+      "styleIncludePaths": [
+        "./src/scss"
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flubs-stuff/ionic4-binary-search-login.git"
+  },
+  "author": "Jeremy Quick <me@jrquick.com>",
+  "keywords": [
+    "angular",
+    "autocomplete",
+    "ionic"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flubs-stuff/ionic4-binary-search-login/issues"
+  },
+  "devDependencies": {
+    "@angular-devkit/architect": "~0.803.20",
+    "@angular-devkit/build-angular": "~0.803.20",
+    "@angular-devkit/core": "~8.3.20",
+    "@angular-devkit/schematics": "~8.3.20",
+    "@angular/animations": "^8.2.11",
+    "@angular/cdk": "^8.2.3",
+    "@angular/cli": "^8.3.20",
+    "@angular/common": "^8.2.6",
+    "@angular/compiler": "^8.2.14",
+    "@angular/compiler-cli": "^8.2.14",
+    "@angular/core": "^8.2.6",
+    "@angular/forms": "^8.2.6",
+    "@angular/language-service": "^8.2.14",
+    "@angular/platform-browser": "^8.2.6",
+    "@angular/platform-browser-dynamic": "^8.2.6",
+    "@angular/router": "^8.2.6",
+    "@angular/service-worker": "^8.2.6",
+    "@compodoc/compodoc": "^1.1.11",
+    "@ionic-native/core": "5.18.0",
+    "@ionic/angular": "^4.11.7",
+    "@ionic/angular-toolkit": "^2.1.1",
+    "@ionic/pro": "2.0.4",
+    "@ionic/storage": "2.2.0",
+    "@types/core-js": "^2.5.2",
+    "@types/jasmine": "~3.5.0",
+    "@types/node": "^12.12.17",
+    "codelyzer": "~5.2.0",
+    "cordova-plugin-ionic": "^5.4.5",
+    "fsevents": "^2.1.2",
+    "jasmine-core": "~3.5.0",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "^4.4.1",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-cli": "~2.0.0",
+    "karma-coverage-istanbul-reporter": "~2.1.1",
+    "karma-jasmine": "~2.0.1",
+    "karma-jasmine-html-reporter": "^1.4.2",
+    "ng-packagr": "^5.7.1",
+    "protractor": "~6.0.0",
+    "rollup": "^1.27.12",
+    "rxjs": "6.5.3",
+    "ts-node": "~8.5.4",
+    "tslint": "~5.20.1",
+    "typescript": "3.5.3",
+    "webpack": "^4.41.2",
+    "zone.js": "^0.9.1"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "peerDependencies": {
+    "@angular/animations": ">=8.2.14",
+    "@angular/common": ">=8.2.14",
+    "@angular/core": ">=8.2.14",
+    "@angular/forms": ">=8.2.14",
+    "@angular/platform-browser": ">=8.2.14",
+    "@angular/platform-browser-dynamic": ">=8.2.14",
+    "@angular/router": ">=8.2.14",
+    "@angular/service-worker": ">=8.2.14",
+    "cordova-plugin-ionic": ">=5.4.5",
+    "core-js": ">=3.5.0",
+    "ionicons": ">=4.6.3",
+    "zone.js": "~0.10.2"
+  },
+  "description": "[![npm](https://img.shields.io/npm/l/@flubs/ionic4-binary-search-login.svg)](https://www.npmjs.com/package/@flubs/ionic4-binary-search-login/) [![npm](https://img.shields.io/npm/dt/@flubs/ionic4-binary-search-login.svg)](https://www.npmjs.com/package/@flubs/ionic4-binary-search-login) [![npm](https://img.shields.io/npm/dm/@flubs/ionic4-binary-search-login.svg)](https://www.npmjs.com/package/@flubs/ionic4-binary-search-login)",
+  "homepage": "https://github.com/flubs-stuff/ionic4-binary-search-login#readme",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  }
+}
