@@ -1,0 +1,37 @@
+<div>
+  <ion-button [color]="'primary'"
+              [expand]="'block'"
+              (click)="higher()"
+              [disabled]="disableHigher">
+
+    <ion-icon [slot]="'start'"
+              [name]="'arrow-round-up'"
+              [color]="'light'"></ion-icon>
+
+    <ion-text [slot]="'end'">Higher</ion-text>
+  </ion-button>
+
+  <ion-button [color]="'medium'"
+              [expand]="'block'"
+              (click)="confirm()"
+              [disabled]="disableConfirm">
+
+    <ion-icon [slot]="'start'"
+              [name]="'checkmark'"
+              [color]="'light'"></ion-icon>
+
+    <ion-text [slot]="'end'">Select</ion-text>
+  </ion-button>
+
+  <ion-button [color]="'danger'"
+              [expand]="'block'"
+              (click)="lower()"
+              [disabled]="disableLower">
+
+    <ion-icon [slot]="'start'"
+              [name]="'arrow-round-down'"
+              [color]="'light'"></ion-icon>
+
+    <ion-text [slot]="'end'">Lower</ion-text>
+  </ion-button>
+</div>

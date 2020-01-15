@@ -1,0 +1,68 @@
+<form (ngSubmit)="login()">
+  <ion-item>
+    <ion-input [placeholder]="'Username'"
+               [name]="'Username'"
+               [disabled]="true"
+               [(ngModel)]="candidateUsername">
+
+      <ion-icon [slot]="'icon-slot'"
+                [ngClass]="user.username.length === 0 ? 'unlock' : 'lock'"
+                style="padding-right: 15px;"
+                (click)="toggleShowPassword()"></ion-icon>
+    </ion-input>
+
+    <ionic4-binary-search-login-controls *ngIf="user.username.length === 0"
+                                         [disableConfirm]="isLoggingIn || isSearching"
+                                         (onConfirm)="setUsername()"
+                                         [disableLower]="isLoggingIn || isSearching"
+                                         (onLower)="findUsername(false)"
+                                         [disableHigher]="isLoggingIn || isSearching"
+                                         (onHigher)="findUsername(true)"></ionic4-binary-search-login-controls>
+  </ion-item>
+
+  <ion-item>
+    <ion-input [type]="showPassword ? 'text' : 'password'"
+               [name]="'Password'"
+               [placeholder]="'Password'"
+               [disabled]="true"
+               [(ngModel)]="user.password"
+               (keyup.enter)="login()">
+
+      <ion-icon *ngIf="user.password.length !== 0"
+                [slot]="'icon-slot'"
+                [ngClass]="'lock'"
+                style="padding-right: 15px;"
+                (click)="toggleShowPassword()"></ion-icon>
+
+      <ion-icon *ngIf="user.password.length === 0"
+                [slot]="'icon-slot'"
+                [ngClass]="showPassword ? 'fa fa-eye' : 'fa fa-eye-slash'"
+                style="padding-right: 15px;"
+                (click)="toggleShowPassword()"></ion-icon>
+    </ion-input>
+
+    <ionic4-binary-search-login-controls *ngIf="user.username.length !== 0"
+                                         [disableConfirm]="isLoggingIn || isSearching"
+                                         (onConfirm)="setUsername()"
+                                         [disableLower]="isLoggingIn || isSearching"
+                                         (onLower)="findUsername(false)"
+                                         [disableHigher]="isLoggingIn || isSearching"
+                                         (onHigher)="findUsername(true)"></ionic4-binary-search-login-controls>
+  </ion-item>
+
+  <ion-row>
+    <ion-col [size]="12">
+      <ion-button [color]="'success'"
+                  [expand]="'block'"
+                  (click)="login()"
+                  [disabled]="isLoggingIn || !formIsFilled()">
+
+        <ion-icon [slot]="'icon-only'"
+                  [name]="'shuffle'"
+                  [color]="'light'"></ion-icon>
+
+        {{ isLoggingIn ? 'Logging in...' : 'Login' }}
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</form>
