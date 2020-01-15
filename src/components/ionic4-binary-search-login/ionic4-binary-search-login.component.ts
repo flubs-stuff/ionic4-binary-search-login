@@ -11,18 +11,22 @@ import {HttpClient} from '@angular/common/http';
   ]
 })
 export class Ionic4BinarySearchLoginComponent {
+  public candidatePassword:string = '';
   public candidateUsername:string = '';
-  public expectedUsername:string = 'fafuller';
-  public isInitializing:boolean = true;
+  public expectedPassword:string = 'pass123';
+  public expectedUsername:string = 'jrquick';
+
+  public isLoadingPasswords:boolean = true;
+  public isLoadingUsernames:boolean = true;
   public isLoggedIn:boolean = false;
   public isLoggingOut:boolean = false;
   public isLoggingIn:boolean = false;
   public isSearching:boolean = false;
+
   public lastI:number = 0;
   public minUsernameLength:number = 8;
   public showPassword:boolean = false;
   public shownI:number = 0;
-  public usernamesLength:number = 0;
   public minI:number = 0;
   public maxI:number = 0;
 
@@ -31,7 +35,10 @@ export class Ionic4BinarySearchLoginComponent {
     password: ''
   };
 
+  private passwords:string[] = [];
+  public passwordsLength:number = 0;
   private usernames:string[] = [];
+  public usernamesLength:number = 0;
 
   @Output() onLogin:EventEmitter<boolean>;
 
@@ -40,7 +47,7 @@ export class Ionic4BinarySearchLoginComponent {
   ) {
     this.onLogin = new EventEmitter<boolean>();
 
-    this.loadUsernames();
+    this.loadPasswords();
   }
 
   createUsernames(word):string[] {
@@ -114,25 +121,21 @@ export class Ionic4BinarySearchLoginComponent {
     return usernames;
   }
 
-  findUsername(isHigher:boolean):void {
-    if (this.lastI === 0) {
-      this.lastI = this.maxI;
-    }
+  findPassword(isHigher:boolean):void {
+    this.updateNumbers(isHigher);
 
-    if (isHigher) {
-      this.minI = this.lastI;
-      this.lastI = (this.lastI + this.maxI) / 2;
-    } else {
-      this.maxI = this.lastI;
-      this.lastI = (this.lastI + this.minI) / 2;
-    }
+    this.candidatePassword = this.search(this.passwords);
 
-    this.lastI = Math.round(this.lastI);
-
-    this.search();
+    this.toggleShowPassword();
   }
 
-  search() {
+  findUsername(isHigher:boolean):void {
+    this.updateNumbers(isHigher);
+
+    this.candidateUsername = this.search(this.usernames);
+  }
+
+  search(hay:string[]):string {
     this.isSearching = true;
 
     if (this.shownI !== this.lastI) {
@@ -151,18 +154,16 @@ export class Ionic4BinarySearchLoginComponent {
         this.shownI++;
       }
 
-      this.candidateUsername = this.usernames[this.shownI];
-
       setTimeout(
         () => {
-          this.search();
+          return this.search(hay);
         },
         1
       );
     } else {
-      this.candidateUsername = this.usernames[this.lastI];
-
       this.isSearching = false;
+
+      return hay[this.lastI];
     }
   }
 
@@ -170,8 +171,8 @@ export class Ionic4BinarySearchLoginComponent {
     return this.user.username.length !== 0 && this.user.password.length !== 0;
   }
 
-  loadUsernames():void {
-    this.isInitializing = true;
+  loadPasswords():void {
+    this.isLoadingPasswords = true;
 
     this.http.get(
       'assets/words.txt',
@@ -181,7 +182,38 @@ export class Ionic4BinarySearchLoginComponent {
     ).pipe(
       finalize(
         () => {
-          this.isInitializing = false;
+          this.isLoadingPasswords = false;
+        }
+      )
+    ).subscribe(
+      (data) => {
+        this.passwords = data.toString().split('\n');
+
+        this.passwords.push(this.expectedPassword);
+
+        // TODO: Make  variants of username with random numbers and mispellings
+
+        this.passwords.sort();
+
+        this.passwordsLength = this.passwords.length;
+
+        this.loadUsernames();
+      }
+    );
+  }
+
+  loadUsernames():void {
+    this.isLoadingUsernames = true;
+
+    this.http.get(
+      'assets/words.txt',
+      {
+        responseType: 'text'
+      }
+    ).pipe(
+      finalize(
+        () => {
+          this.isLoadingUsernames = false;
         }
       )
     ).subscribe(
@@ -216,6 +248,12 @@ export class Ionic4BinarySearchLoginComponent {
     );
   }
 
+  resetSearch():void {
+    this.lastI = 0;
+    this.minI = 0;
+    this.shownI = 0;
+  }
+
   logout():void {
     this.isLoggingIn = true;
 
@@ -228,12 +266,44 @@ export class Ionic4BinarySearchLoginComponent {
     );
   }
 
+  setPassword():void {
+    this.user.password = this.candidatePassword;
+  }
+
   setUsername():void {
     this.user.username = this.candidateUsername;
+
+    this.resetSearch();
+
+    this.maxI = this.usernamesLength;
   }
 
   toggleShowPassword():void {
     this.showPassword = !this.showPassword;
+  }
+
+  updateNumbers(isHigher:boolean):void {
+    if (this.lastI === 0) {
+      this.lastI = this.maxI;
+    }
+
+    if (isHigher) {
+      if (this.lastI === this.maxI) {
+        this.maxI = (this.maxI + this.usernamesLength) / 2;
+      }
+
+      this.minI = this.lastI;
+      this.lastI = (this.lastI + this.maxI) / 2;
+    } else {
+      if (this.lastI === this.minI) {
+        this.minI = (this.minI + 0) / 2;
+      }
+
+      this.maxI = this.lastI;
+      this.lastI = (this.lastI + this.minI) / 2;
+    }
+
+    this.lastI = Math.round(this.lastI);
   }
 }
 

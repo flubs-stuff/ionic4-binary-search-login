@@ -43,11 +43,11 @@
 
     <ionic4-binary-search-login-controls *ngIf="user.username.length !== 0"
                                          [disableConfirm]="isLoggingIn || isSearching"
-                                         (onConfirm)="setUsername()"
+                                         (onConfirm)="setPassword()"
                                          [disableLower]="isLoggingIn || isSearching"
-                                         (onLower)="findUsername(false)"
+                                         (onLower)="findPassword(false)"
                                          [disableHigher]="isLoggingIn || isSearching"
-                                         (onHigher)="findUsername(true)"></ionic4-binary-search-login-controls>
+                                         (onHigher)="findPassword(true)"></ionic4-binary-search-login-controls>
   </ion-item>
 
   <ion-row>
