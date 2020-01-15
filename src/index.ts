@@ -4,6 +4,12 @@ import {FormsModule} from '@angular/forms';
 
 import {IonicModule} from '@ionic/angular';
 
+export * from './services/password.service';
+export * from './services/username.service';
+
+import {PasswordService} from './services/password.service';
+import {UsernameService} from './services/username.service';
+
 export * from './components/ionic4-binary-search-login/ionic4-binary-search-login.component';
 export * from './components/ionic4-binary-search-login-controls/ionic4-binary-search-login-controls.component';
 
@@ -25,7 +31,9 @@ import {Ionic4BinarySearchLoginControlsComponent} from './components/ionic4-bina
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule
+    IonicModule,
+    PasswordService,
+    UsernameService
   ]
 })
 export class Ionic4BinarySearchLoginModule {
