@@ -4,9 +4,9 @@
   "private": false,
   "scripts": {
     "build": "ng-packagr -p package.json && cp src/scss/ionic4-binary-search-login.scss dist/ionic4-binary-search-login.scss && cp -r src/assets dist/assets",
-    "demo": "cd demo && ionic serve",
+    "demo:run": "cd demo && ionic serve",
     "demo:build": "npm run build && cd demo && cp -fr ../dist/* node_modules/@flubs/ionic4-binary-search-login/ && cd ..",
-    "demo:run": "npm run demo:build && npm run demo",
+    "demo:test": "npm run demo:build && npm run demo",
     "docs": "npm run docs:build",
     "docs:build": "compodoc -p tsconfig.json -n ionic4-binary-search-login -d docs --hideGenerator",
     "docs:serve": "npm run docs:build -- -s",
