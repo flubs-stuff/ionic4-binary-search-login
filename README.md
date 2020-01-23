@@ -16,11 +16,11 @@
 
 ## About ## 
 
-This is a bad phone number picker for Angular 2+. 
+This is a binary search login form component for Angular 2+ which you should never really consider using..
 
 * Try out [the demo](https://ionic4-binary-search-login.jrquick.com) to see it in action!
-* Checkout my other Ionic/Angular projects: [ionic4-tooltips](https://github.com/jrquick17/ionic4-tooltips) and [ionic4-binary-search-login](https://github.com/flubs-stuff/ionic4-binary-search-login)!
-* Visit [my website](https://jrquick.com) for other cool projects!
+* Checkout my other bad project: [ionic4-phone-spinner](https://github.com/jrquick17/ionic4-phone-spinner)!
+* Visit [my website](https://jrquick.com) for other projects!
 
 ## Setup ##
 
