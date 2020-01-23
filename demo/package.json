@@ -43,22 +43,22 @@
     "rxjs-compat": "^6.5.4",
     "stream": "0.0.2",
     "timers": "^0.1.1",
-    "zone.js": "^0.9.1"
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.803.22",
-    "@angular-devkit/build-angular": "^0.803.22",
-    "@angular-devkit/core": "^8.3.22",
-    "@angular-devkit/schematics": "^8.3.22",
-    "@angular/cli": "^8.3.22",
+    "@angular-devkit/architect": "^0.803.23",
+    "@angular-devkit/build-angular": "^0.803.23",
+    "@angular-devkit/core": "^8.3.23",
+    "@angular-devkit/schematics": "^8.3.23",
+    "@angular/cli": "^8.3.23",
     "@angular/compiler": "^8.2.14",
     "@angular/compiler-cli": "^8.2.14",
     "@angular/language-service": "^8.2.14",
     "@ionic/angular-toolkit": "^2.1.2",
     "@phenomnomnominal/angular-lazy-routes-fix": "^0.1.5",
     "@types/core-js": "^2.5.2",
-    "@types/jasmine": "~3.5.0",
-    "@types/node": "^13.1.6",
+    "@types/jasmine": "~3.5.1",
+    "@types/node": "^13.1.8",
     "codelyzer": "~5.2.1",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -69,8 +69,8 @@
     "karma-jasmine-html-reporter": "^1.5.1",
     "protractor": "~5.4.2",
     "ts-node": "~8.6.2",
-    "tslint": "~5.20.1",
-    "typescript": "^3.5.3"
+    "tslint": "^5.20.1",
+    "typescript": "~3.5.3"
   },
   "description": "Demo for ionic4-binary-search-login",
   "cordova": {
