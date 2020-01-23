@@ -1,6 +1,6 @@
 {
   "name": "@flubs/ionic4-binary-search-login",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": false,
   "scripts": {
     "build": "ng-packagr -p package.json && cp src/scss/ionic4-binary-search-login.scss dist/ionic4-binary-search-login.scss && cp -r src/assets dist/assets",
